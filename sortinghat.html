@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+ 
+<html>
+    <head>
+        <title>Simple R I/O Example</title>
+<script>
+  // helper function: log message to screen
+  function log(msg) {
+    document.getElementById('log').textContent += msg + '\n';
+  }
+
+  // setup websocket with callbacks
+  var ws = new WebSocket('ws://localhost:8080/');
+  ws.onmessage = function(event) {
+      document.getElementById('msgBox').innerHTML = event.data;
+      document.getElementById('outMsg').value='';
+  }
+  
+  function send()
+  {
+      ws.send('adam');
+      
+  } 
+</script>
+</head>
+<body>
+        <div id='msgBox'>Nothing sent yet!</div>
+        <input type="text" id="outMsg">
+        <button type="button" onclick="send()">Send</button>
+</body>
+</html>
+
