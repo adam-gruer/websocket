@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>websocketd greeter example</title>
+    <style>
+      #messages {
+        font: bold 2em arial;
+        margin: auto;
+        padding: 10px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="messages"></div>
+    <div><input id="words"><button id="send">Send</button></div>
+
+    <script>
+      var ws = new WebSocket('ws://localhost:8080/');
+      ws.onopen = function() {
+        document.body.style.backgroundColor = '#cfc';
+      };
+      ws.onclose = function() {
+        document.body.style.backgroundColor = null;
+      };
+      ws.onmessage = function(event) {
+        document.getElementById('messages').textContent = event.data;
+      };
+      document.getElementById('send').addEventListener("click", function(){
+         ws.send(document.getElementById('words').value);
+      })
+    </script>
+
+  </body>
+</html>
