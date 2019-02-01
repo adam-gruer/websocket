@@ -2,25 +2,23 @@
  
 <html>
     <head>
-        <title>Simple R I/O Example</title>
+        <title>Sorting Hat Example</title>
 <script>
-  // helper function: log message to screen
-  function log(msg) {
-    document.getElementById('log').textContent += msg + '\n';
-  }
+ 
 
   // setup websocket with callbacks
   var ws = new WebSocket('ws://localhost:8080/');
+  
   ws.onmessage = function(event) {
       document.getElementById('msgBox').innerHTML = event.data;
       document.getElementById('outMsg').value='';
-  }
+  };
   
-  function send()
-  {
-      ws.send('adam');
-      
-  } 
+  send = function(){
+    
+    ws.send(document.getElementById('outMsg').value);
+  };
+  
 </script>
 </head>
 <body>
