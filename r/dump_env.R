@@ -1,5 +1,5 @@
 #!/usr/bin/env Rscript --vanilla
-
+library(magrittr)
 var_names = c(
   'AUTH_TYPE',
   'CONTENT_LENGTH',
@@ -24,6 +24,15 @@ var_names = c(
   'HTTPS'
 )
 
-cat(Sys.getenv(var_names),grep('^HTTP_', Sys.getenv()),"\n")
+c(
+  Sys.getenv(var_names),
+  grep('^HTTP_', Sys.getenv())
+  ) %>%
+  as.list() %>% 
+  jsonlite::toJSON() %>% 
+  cat("\n")
+
+
+
 
 
